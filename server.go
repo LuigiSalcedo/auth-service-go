@@ -2,6 +2,7 @@ package main
 
 import (
 	"authentication/config"
+	"authentication/handlers"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -15,7 +16,12 @@ func main() {
 
 	router := gin.Default()
 
+	config.LoadEnvironmentVariables()
+	config.InitDatabaseConnection()
+	config.MigrateUserModel()
 	config.LoadBeauty()
+
+	router.POST("auth/register", handlers.Register)
 
 	fmt.Println("Server running on port", serverPort)
 
