@@ -19,6 +19,7 @@ func main() {
 	config.InitDatabaseConnection()
 	config.MigrateUserModel()
 	config.LoadBeauty()
+	config.LoadCors(router)
 
 	router.POST("auth/register", handlers.Register)
 	router.POST("auth/login", handlers.Login)
