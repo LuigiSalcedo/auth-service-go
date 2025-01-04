@@ -35,8 +35,7 @@ func VerifyToken(tokenString string) (*models.User, error) {
 	}
 
 	user := new(models.User)
-	user.Username = claims["username"].(string)
-	user.Email = claims["email"].(string)
+	user.ID = claims["id"].(uint)
 
 	return user, nil
 }
