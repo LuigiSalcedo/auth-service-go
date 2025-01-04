@@ -12,7 +12,6 @@ const serverPort = 8808
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)
-	gin.DisableConsoleColor()
 
 	router := gin.Default()
 
@@ -22,6 +21,7 @@ func main() {
 	config.LoadBeauty()
 
 	router.POST("auth/register", handlers.Register)
+	router.POST("auth/login", handlers.Login)
 
 	fmt.Println("Server running on port", serverPort)
 
