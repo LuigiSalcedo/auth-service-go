@@ -12,7 +12,7 @@ func LoadCors(router *gin.Engine) {
 	envOrigins := os.Getenv("CORS_ORIGINS")
 
 	if envOrigins == "" {
-		origins = []string{"*"}
+		envOrigins = "*"
 	}
 
 	origins = strings.Split(envOrigins, ",")
