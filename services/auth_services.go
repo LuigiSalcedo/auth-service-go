@@ -4,7 +4,6 @@ import (
 	"authentication/config"
 	"authentication/models"
 	"errors"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var (
@@ -14,8 +13,7 @@ var (
 
 func RegisterUser(user *models.User) bool {
 	db := config.DB()
-	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
-	user.Password = string(hashedPassword)
+	user.Password = encryptPassword(user.Password)
 	result := db.Create(user)
 
 	if result.Error == nil {
