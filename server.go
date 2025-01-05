@@ -23,6 +23,7 @@ func main() {
 
 	router.POST("auth/register", handlers.Register)
 	router.POST("auth/login", handlers.Login)
+	router.GET("auth/validate", handlers.ValidateToken)
 
 	fmt.Println("Server running on port", serverPort)
 

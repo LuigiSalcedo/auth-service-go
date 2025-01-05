@@ -4,6 +4,7 @@ import (
 	"authentication/models"
 	"authentication/services"
 	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -69,4 +70,23 @@ func Login(ctx *gin.Context) {
 	}
 
 	ctx.JSON(400, Token{Token: token, Type: tokenTypen})
+}
+
+func ValidateToken(ctx *gin.Context) {
+	token := ctx.GetHeader("Authorization")
+
+	if token == "" {
+		ctx.JSON(400, gin.H{"error": "token not provided"})
+		return
+	}
+
+	user, err := services.ValidateToken(token)
+
+	if err != nil {
+		ctx.JSON(401, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.Request.Header.Add("X-User-ID", fmt.Sprintf("%d", user.ID))
+	ctx.Next()
 }
