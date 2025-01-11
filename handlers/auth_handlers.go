@@ -69,7 +69,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(400, Token{Token: token, Type: tokenTypen})
+	ctx.JSON(200, Token{Token: token, Type: tokenTypen})
 }
 
 func ValidateToken(ctx *gin.Context) {
